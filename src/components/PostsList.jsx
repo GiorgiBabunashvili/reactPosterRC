@@ -4,14 +4,9 @@ import Post from "./Post";
 import NewPost from "./NewPost";
 import Modal from "./Modal";
 
-const PostsList = () => {
-  const [modalIsVisible, setModalIsVisible] = useState(true);
+const PostsList = ({ isPosting, onStopPosting }) => {
   const [enteredBody, setEnteredBody] = useState("");
   const [enteredAuthor, setEnteredAuthor] = useState("");
-
-  function hideModalhandler() {
-    setModalIsVisible(false);
-  }
 
   function bodyChangeHanlder(e) {
     setEnteredBody(e.target.value);
@@ -21,23 +16,10 @@ const PostsList = () => {
     setEnteredAuthor(e.target.value);
   }
 
-  // let modalContent;
-
-  // if (modalIsVisible) {
-  //   modalContent = (
-  //     <Modal onClose={hideModalhandler}>
-  //       <NewPost
-  //         onBodyChange={bodyChangeHanlder}
-  //         onAuthorChange={authorChangeHanlder}
-  //       />
-  //     </Modal>
-  //   );
-  // }
-
   return (
     <>
-      {modalIsVisible && (
-        <Modal onClose={hideModalhandler}>
+      {isPosting && (
+        <Modal onClose={onStopPosting}>
           <NewPost
             onBodyChange={bodyChangeHanlder}
             onAuthorChange={authorChangeHanlder}
